@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.rj.bd.dao.WeixiuMapper">
+		<resultMap type="com.rj.bd.weixiu.entity.Weixiu" id="noticeResult">
+			<result property="wx_id" column="wx_id"/>
+			<result property="wx_date" column="wx_date"/>
+			<result property="zc_id" column="zc_id"/>
+			<result property="wx_des" column="wx_des"/>
+			<result property="zc_name" column="zc_name"/>
+			<result property="zc_jiage" column="zc_jiage"/>
+		</resultMap>
+
+		<select id="queryAll"  resultMap="noticeResult">
+			SELECT wx.wx_id,wx.wx_date,wx.wx_des,wx.zc_id,zc.zc_name,zc.zc_jiage FROM weixiu AS wx LEFT JOIN zichan AS zc ON wx.zc_id=zc.zc_id 
+		</select>
+			
+			
+		<select id="studentsearch"   resultMap="noticeResult">
+			SELECT sa.s_id ,sa.s_student,sa.d_class,sb.m_id,sb.m_number,sb.m_studentnum, sb.c_condition,sb.m_money FROM  (
+			SELECT student.s_id,student.s_student , `data`.d_class FROM student LEFT JOIN `data` ON student.s_id = `data`.s_id
+			)sa 
+			LEFT JOIN (SELECT message.m_id,message.s_id,message.m_number,message.m_studentnum,`condition`.c_condition,money.m_money 
+			FROM message 
+			RIGHT JOIN `condition` ON message.m_id=`condition`.m_id 
+			RIGHT JOIN money ON message.m_id=money.m_id
+			)sb  ON sa.s_id = sb.s_id
+			WHERE 
+				d_class LIKE '%${search}%' 
+				OR s_student LIKE '%${search}%'
+				OR m_studentnum LIKE '%${search}%'
+				OR m_number LIKE '%${search}%'
+		</select>
+			
+			
+			
+			
+
+	</mapper>

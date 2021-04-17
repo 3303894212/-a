@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.rj.bd.dao.LeiBieMapper">
+		<resultMap type="com.rj.bd.leibie.entity.LeiBie" id="noticeResult">
+			<result property="lb_id" column="lb_id"/>
+			<result property="lb_name" column="lb_name"/>
+		</resultMap>
+
+		<select id="queryAll"  resultMap="noticeResult">
+			select l.lb_id,l.lb_name from leibie as l
+		</select>
+			
+		<delete id="delete" parameterType="com.rj.bd.leibie.entity.LeiBie">
+		DELETE FROM zichan WHERE lb_id=#{lb_id}
+		
+		</delete>
+		<delete id="delete2" parameterType="com.rj.bd.leibie.entity.LeiBie">
+		delete from leibie where lb_id=#{lb_id}
+		
+		</delete>
+			
+			
+			
+			
+
+	</mapper>

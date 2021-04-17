@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.rj.bd.dao.BaoFeiMapper">
+		<resultMap type="com.rj.bd.baofei.entity.BaoFei" id="noticeResult">
+			<result property="bf_id" column="bf_id"/>
+			<result property="bf_date" column="bf_date"/>
+			<result property="bf_des" column="bf_des"/>
+			<result property="zc_id" column="zc_id"/>
+			<result property="zc_name" column="zc_name"/>
+			<result property="zc_jiage" column="zc_jiage"/>
+		</resultMap>
+
+		<select id="queryAll"  resultMap="noticeResult">
+			SELECT bf.bf_id,bf.bf_date,bf.bf_des,bf.zc_id,zc.zc_name,zc.zc_jiage FROM baofei AS bf LEFT JOIN zichan AS zc ON bf.zc_id=zc.zc_id 
+		</select>
+			
+		
+			
+			
+			
+			
+
+	</mapper>

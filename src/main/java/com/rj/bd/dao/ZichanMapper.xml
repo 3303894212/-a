@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+	<mapper namespace="com.rj.bd.dao.ZichanMapper">
+		<resultMap type="com.rj.bd.zichan.entity.Zichan" id="noticeResult">
+			<result property="zc_id" column="zc_id"/>
+			<result property="zc_name" column="zc_name"/>
+			<result property="zc_jiage" column="zc_jiage"/>
+			<result property="zc_date" column="zc_date"/>
+			<result property="zc_state" column="zc_state"/>
+			<result property="zc_des" column="zc_des"/>
+			<result property="lb_name" column="lb_name"/>
+			<result property="emp_name" column="emp_name"/>
+		</resultMap>
+
+		<select id="queryAll"  resultMap="noticeResult">
+			SELECT z.zc_id,z.zc_name,z.zc_jiage,z.zc_date,z.zc_state,z.zc_des,l.lb_name,e.emp_name FROM zichan z,leibie l,employee e WHERE z.lb_id=l.lb_id AND z.emp_id=e.emp_id
+		</select>
+		
+		
+</mapper>
